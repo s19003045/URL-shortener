@@ -4,7 +4,8 @@ const port = 3000
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/urlshortener', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
 const db = mongoose.connection
-
+const shortid = require('shortid')
+const UrlShortened = require('./models/urlShortened.js')
 
 
 
@@ -24,6 +25,7 @@ db.once('open', () => {
 // ===================route setting=============
 
 app.get('/', (req, res) => {
+  console.log(shortid.generate('https://www.google.com.tw/'))
   res.send('hello world')
 })
 
