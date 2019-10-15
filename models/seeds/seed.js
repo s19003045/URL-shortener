@@ -18,14 +18,25 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongoose connect success')
 
+  let urlCode = ''
+  let letters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  for (i = 0; i < 5; i++) {
+    urlCode += letters[Math.floor(Math.random() * (letters.length))]
+  }
+  // let urlCode
+  // urlCode = shortid.generate().slice(0, 5)
 
-  const urlCode = shortid.generate()
   console.log('urlCode:', urlCode)
   const newUrl = new UrlShortened({
-    originalUrl: 'https://www.google.com.tw',
+    originalUrl: 'https://lighthouse.alphacamp.co',
     urlCode: urlCode,
     shortUrl: `http://localhost:3000/${urlCode}`
   })
+
+  // UrlShortened.findOne({ originalUrl: 'https://www.google.com.tw' })
+  //   .then(record => {
+  //     console.log(record)
+  //   })
   newUrl.save()
     .then(record => {
       console.log(record)
