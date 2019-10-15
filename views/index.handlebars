@@ -1,11 +1,33 @@
-<form action="/" method="POST">
-  <label for="originalUrl">url-shortened:</label>
-  <input type="text" id="originalUrl" name="originalUrl" value="{{originalUrl}}">
-  <button type="submit">轉換成短網址</button>
-</form>
+<div class="row mx-auto mt-5">
+  <div class="col col-lg-8 mx-auto">
+    <form action="/" method="POST" class="form  mb-5">
 
-{{> messages}}
+      <div class="form-group row">
+        <label for="originalUrl" class="col">
+          原始網址：
+        </label>
 
-<label for="urlShortened">縮短的網址為：</label>
-<h3 id="urlShortened">{{record.shortUrl}}</h3>
-<a href="/{{record.urlCode}}" class="btn btn-primary" target="_blank">連結</a>
+        <input class="col col-8" type="text" class="form-control mt-2" id="originalUrl" placeholder=""
+          name="originalUrl" value="{{originalUrl}}">
+        <div class="">
+          <button type="submit" class="btn btn-primary">產生短網址</button>
+        </div>
+
+      </div>
+    </form>
+
+    {{> messages}}
+
+
+    <div class="input-group mb-5">
+      <label for="urlShortened" class="col col-3">
+        縮短的網址為：
+      </label>
+      <input type="text" class="col col-8 form-control" id="urlShortened" value=" {{record.shortUrl}}" disabled>
+      <div class="">
+        <a href="/{{record.urlCode}}" class="btn btn-info" target="_blank">連結</a>
+      </div>
+    </div>
+
+  </div>
+</div>

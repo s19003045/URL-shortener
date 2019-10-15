@@ -118,11 +118,9 @@ app.get('/:urlcode', (req, res) => {
   UrlShortened.findOne({ urlCode: req.params.urlcode })
     .then(record => {
       console.log(record)
-
-      res.redirect(`${record.originalUrl}`)
+      const URLlink = record.originalUrl
+      res.redirect(URLlink)
     })
-
-
 })
 
 app.listen(process.env.PORT || port, () => {
