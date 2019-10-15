@@ -80,11 +80,11 @@ app.post('/', (req, res) => {
     req.flash('failure_msg', '輸入的網址格式不正確！')
     res.redirect('/')
   } else {
-    req.flash('success_msg', '網址格式正確！')
+    // req.flash('success_msg', '網址格式正確！')
     UrlShortened.findOne({ originalUrl: originalUrl })
       .then(record => {
         if (!record) {
-          console.log('資料庫無此筆資料')
+          console.log('資料庫無此筆資料，新增一筆至資料庫')
 
           let urlCode = ''
           let letters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -99,11 +99,11 @@ app.post('/', (req, res) => {
           })
             .then(record => {
               console.log(record)
-              res.render('index', { record })
+              res.render('index', { record, originalUrl })
             })
         } else {
           console.log('資料庫已有此筆資料:', record)
-          res.render('index', { record })
+          res.render('index', { record, originalUrl })
         }
       })
   }
@@ -112,7 +112,18 @@ app.post('/', (req, res) => {
 })
 
 
-// app.get()
+app.get('/:urlcode', (req, res) => {
+  console.log(req.params.urlcode)
+
+  UrlShortened.findOne({ urlCode: req.params.urlcode })
+    .then(record => {
+      console.log(record)
+
+      res.redirect(`${record.originalUrl}`)
+    })
+
+
+})
 
 app.listen(process.env.PORT || port, () => {
   console.log(`Express server start`)

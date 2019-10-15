@@ -1,6 +1,6 @@
 <form action="/" method="POST">
   <label for="originalUrl">url-shortened:</label>
-  <input type="text" id="originalUrl" name="originalUrl" value="">
+  <input type="text" id="originalUrl" name="originalUrl" value="{{originalUrl}}">
   <button type="submit">轉換成短網址</button>
 </form>
 
@@ -8,3 +8,4 @@
 
 <label for="urlShortened">縮短的網址為：</label>
 <h3 id="urlShortened">{{record.shortUrl}}</h3>
+<a href="/{{record.urlCode}}" class="btn btn-primary" target="_blank">連結</a>
