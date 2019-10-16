@@ -89,30 +89,11 @@ connect-flash、
 ## 畫面(手機)
 
 - mobile UI
-  ![mobile demo](https://github.com/s19003045/expense-tracker/blob/master/imagesForGithub/mobile/expense-tracker-demo.png)
 
 ## 畫面
 
-- 瀏灠所有帳本記錄
-  ![首頁..瀏灠所有帳本記錄](https://github.com/s19003045/expense-tracker/blob/master/imagesForGithub/index_page.png)
-
-- 新增帳本記錄
-  ![新增帳本記錄](https://github.com/s19003045/expense-tracker/blob/master/imagesForGithub/newPage.png)
-
-- 編輯帳本記錄
-  ![編輯帳本記錄](https://github.com/s19003045/expense-tracker/blob/master/imagesForGithub/editPage.png)
-
-- 搜尋帳本記錄功能：依類別及日期區間篩選
-  ![搜尋帳本記錄](https://github.com/s19003045/expense-tracker/blob/master/imagesForGithub/searchFeature.png)
-
-- 搜尋帳本記錄結果
-  ![搜尋帳本記錄](https://github.com/s19003045/expense-tracker/blob/master/imagesForGithub/searchResult.png)
-
-- 註冊頁面
-  ![註冊頁面](https://github.com/s19003045/expense-tracker/blob/master/imagesForGithub/register.png)
-
-- 登入頁面
-  ![登入頁面](https://github.com/s19003045/expense-tracker/blob/master/imagesForGithub/login.png)
+- 首頁
+  ![首頁](https://github.com/s19003045/expense-tracker/blob/master/imagesForGithub/index_page.png)
 
 ## 開發人員
 
