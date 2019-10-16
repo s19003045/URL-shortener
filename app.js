@@ -71,8 +71,8 @@ app.get('/', (req, res) => {
 
 // 送出原始網址的資料，轉成短網址，並存進資料庫
 app.post('/', (req, res) => {
-  console.log('使用者輸入的網址：', req.body.originalUrl)
-  const originalUrl = req.body.originalUrl
+  console.log('使用者輸入的原始網址：', req.body.originalUrl)
+  const originalUrl = req.body.originalUrl.trim()
 
   console.log('驗證是否為正確網址格式：', IsURL(originalUrl))
 
@@ -112,15 +112,18 @@ app.post('/', (req, res) => {
 })
 
 
-
-
-
 app.post('/search', (req, res) => {
-  const searchURL = req.body.searchURL
-  console.log('searchURL:', req.body.searchURL)
-  UrlShortened.findOne({ shortUrl: req.body.searchURL }, (err, recordForSearch) => {
-    console.log('recordForSearch:', recordForSearch)
-    res.render('index', { recordForSearch, searchURL })
+  const searchURL = req.body.searchURL.trim()
+  console.log('searchURL:', searchURL)
+  UrlShortened.findOne({ shortUrl: searchURL }, (err, recordForSearch) => {
+    if (!recordForSearch) {
+      errMsg = '**查無此短網址之資訊**'
+      res.render('index', { recordForSearch, searchURL, errMsg })
+    } else {
+      console.log('recordForSearch:', recordForSearch)
+      res.render('index', { recordForSearch, searchURL })
+    }
+
   })
 })
 
