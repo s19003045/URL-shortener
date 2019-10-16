@@ -1,0 +1,5 @@
+/node_modules
+/localFileNoGitPush
+/test
+.env
+/local_file
