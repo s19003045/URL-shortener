@@ -4,7 +4,7 @@ const port = 3000
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/urlshortener', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
 const db = mongoose.connection
-const shortid = require('shortid')
+// const shortid = require('shortid')
 const UrlShortened = require('../urlShortened.js')
 
 
@@ -23,8 +23,6 @@ db.once('open', () => {
   for (i = 0; i < 5; i++) {
     urlCode += letters[Math.floor(Math.random() * (letters.length))]
   }
-  // let urlCode
-  // urlCode = shortid.generate().slice(0, 5)
 
   console.log('urlCode:', urlCode)
   const newUrl = new UrlShortened({

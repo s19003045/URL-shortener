@@ -1,33 +1,56 @@
-<div class="row mx-auto mt-5">
+<div class="row mx-auto my-5">
   <div class="col col-lg-8 mx-auto">
-    <form action="/" method="POST" class="form  mb-5">
+    <form action="/search" method="POST">
+      <div class="form-group">
+        <label for="search"><i class="fas fa-search fa-2x mr-3"></i>搜尋短網址之原始網址</label>
+        <input type="search" class="form-control mt-2" id="search" maxlength="" placeholder="SEARCH"
+          value="{{searchURL}}" name="searchURL">
+        <button type="submit" class="btn btn-primary mt-2">SEARCH</button>
+      </div>
+    </form>
 
-      <div class="form-group row">
-        <label for="originalUrl" class="col">
-          原始網址：
-        </label>
+    <div class="form-group mt-4 mb-5">
+      <label for="url_original" class="col col-3">
+        Orginal URL
+      </label>
+      <input type="text" class="col col-8 form-control" id="url_original" value="{{recordForSearch.originalUrl}}"
+        disabled>
 
-        <input class="col col-8" type="text" class="form-control mt-2" id="originalUrl" placeholder="以 http:// 或 https:// 開頭"
-          name="originalUrl" value="{{originalUrl}}">
-        <div class="">
-          <button type="submit" class="btn btn-primary">產生短網址</button>
-        </div>
+    </div>
 
+  </div>
+</div>
+
+<hr>
+
+<div class="row mx-auto mt-3">
+  <div class="col col-lg-8 mx-auto">
+
+    <h3 class="mb-5 text-center">Short link generator</h3>
+    <form action="/" method="POST" class="form  mb-3">
+      <div class="form-group">
+        <label for="originalUrl">Original URL</label>
+        <input type="text" class="form-control" id="originalUrl" name="originalUrl"
+          placeholder="以 http:// 或 https:// 開頭" value="{{originalUrl}}" required>
+        <button type="submit" class="btn btn-primary mt-2">generate</button>
       </div>
     </form>
 
     {{> messages}}
 
 
-    <div class="input-group mb-5">
+    <div class="form-group mt-4 mb-5">
       <label for="urlShortened" class="col col-3">
-        縮短的網址為：
+        Short URL
       </label>
-      <input type="text" class="col col-8 form-control" id="urlShortened" value=" {{record.shortUrl}}" disabled>
-      <div class="">
-        <a href="/{{record.urlCode}}" class="btn btn-info" target="_blank">連結</a>
+      <input type="text" class="col col-8 form-control" id="urlShortened-search" value="{{record.shortUrl}}">
+
+      <div class=" mt-2">
+        <button class="btn btn-secondary  btn-copyShortURL">
+          <i class="fas fa-link mr-2"></i>copy link
+        </button>
+        <a href="/link/{{record.urlCode}}" class="btn btn-info" target="_blank">link to website</a>
       </div>
     </div>
-
   </div>
 </div>

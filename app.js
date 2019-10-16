@@ -112,12 +112,24 @@ app.post('/', (req, res) => {
 })
 
 
-app.get('/:urlcode', (req, res) => {
-  console.log(req.params.urlcode)
+
+
+
+app.post('/search', (req, res) => {
+  const searchURL = req.body.searchURL
+  console.log('searchURL:', req.body.searchURL)
+  UrlShortened.findOne({ shortUrl: req.body.searchURL }, (err, recordForSearch) => {
+    console.log('recordForSearch:', recordForSearch)
+    res.render('index', { recordForSearch, searchURL })
+  })
+})
+
+app.get('/link/:urlcode', (req, res) => {
+  console.log('req.params.urlcode:', req.params.urlcode)
 
   UrlShortened.findOne({ urlCode: req.params.urlcode })
     .then(record => {
-      console.log(record)
+      console.log('record:', record)
       const URLlink = record.originalUrl
       res.redirect(URLlink)
     })
