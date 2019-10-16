@@ -5,7 +5,9 @@ let hostname = 'https://stark-dusk-36112.herokuapp.com'
 
 
 // 判別開發環境
-if (process.env.NODE_ENV !== 'production') {      // 如果不是 production 模式
+if (process.env.NODE_ENV !== 'production') {
+  console.log('判別開發環境')
+  // 如果不是 production 模式
   require('dotenv').config()                    // 使用 dotenv 讀取 .env 檔案
   hostname = 'http://localhost:3000'
 }
@@ -104,7 +106,7 @@ app.post('/', (req, res) => {
           UrlShortened.create({
             originalUrl: originalUrl,
             urlCode: urlCode,
-            shortUrl: `${hostname}/${urlCode}`
+            shortUrl: `${hostname}/link/${urlCode}`
           })
             .then(record => {
               console.log(record)
