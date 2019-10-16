@@ -1,6 +1,15 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
+let hostname = 'https://stark-dusk-36112.herokuapp.com'
+
+
+// 判別開發環境
+if (process.env.NODE_ENV !== 'production') {      // 如果不是 production 模式
+  require('dotenv').config()                    // 使用 dotenv 讀取 .env 檔案
+  hostname = 'http://localhost:3000'
+}
+
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/urlshortener', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
 const db = mongoose.connection
@@ -95,7 +104,7 @@ app.post('/', (req, res) => {
           UrlShortened.create({
             originalUrl: originalUrl,
             urlCode: urlCode,
-            shortUrl: `http://localhost:3000/${urlCode}`
+            shortUrl: `${hostname}/${urlCode}`
           })
             .then(record => {
               console.log(record)
@@ -138,7 +147,7 @@ app.get('/link/:urlcode', (req, res) => {
     })
 })
 
-app.listen(process.env.PORT || port, () => {
+app.listen(port, () => {
   console.log(`Express server start`)
 })
 
