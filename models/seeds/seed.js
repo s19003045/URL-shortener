@@ -1,12 +1,18 @@
 const express = require('express')
 const app = express()
 const port = 3000
+let hostname = 'https://stark-dusk-36112.herokuapp.com'
 const mongoose = require('mongoose')
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/urlshortener', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+
+// 連到本機之 mongoDB
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/urlshortener', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+
+// 從本地連到遠端 mongoDB
+mongoose.connect('mongodb://heroku_dw4g3l4z:eqcpee6ab4jk6vg1n9khl2eob7@ds235658.mlab.com:35658/heroku_dw4g3l4z', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+
 const db = mongoose.connection
 // const shortid = require('shortid')
 const UrlShortened = require('../urlShortened.js')
-
 
 
 // 使用"連續"監聽器：listen to error
@@ -18,6 +24,7 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongoose connect success')
 
+
   let urlCode = ''
   let letters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
   for (i = 0; i < 5; i++) {
@@ -28,13 +35,9 @@ db.once('open', () => {
   const newUrl = new UrlShortened({
     originalUrl: 'https://lighthouse.alphacamp.co',
     urlCode: urlCode,
-    shortUrl: `http://localhost:3000/${urlCode}`
+    shortUrl: `${hostname}/link/${urlCode}`
   })
 
-  // UrlShortened.findOne({ originalUrl: 'https://www.google.com.tw' })
-  //   .then(record => {
-  //     console.log(record)
-  //   })
   newUrl.save()
     .then(record => {
       console.log(record)
