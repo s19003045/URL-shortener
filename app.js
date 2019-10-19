@@ -106,7 +106,7 @@ app.post('/', (req, res) => {
           UrlShortened.create({
             originalUrl: originalUrl,
             urlCode: urlCode,
-            shortUrl: `${hostname}/link/${urlCode}`
+            shortUrl: `${hostname}/${urlCode}`
           })
             .then(record => {
               console.log(record)
@@ -122,9 +122,13 @@ app.post('/', (req, res) => {
 
 })
 
+// 搜尋 record 頁面
 
-app.post('/search', (req, res) => {
-  const searchURL = req.body.searchURL.trim()
+app.get('/search', (req, res) => {
+  let { searchURL } = req.query
+  console.log(searchURL)
+  searchURL = searchURL.trim()
+  // const searchURL = req.body.searchURL.trim()
   console.log('searchURL:', searchURL)
   UrlShortened.findOne({ shortUrl: searchURL }, (err, recordForSearch) => {
     if (!recordForSearch) {
@@ -136,9 +140,10 @@ app.post('/search', (req, res) => {
     }
 
   })
+
 })
 
-app.get('/link/:urlcode', (req, res) => {
+app.get('/:urlcode', (req, res) => {
   console.log('req.params.urlcode:', req.params.urlcode)
 
   UrlShortened.findOne({ urlCode: req.params.urlcode })

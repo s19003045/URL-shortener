@@ -1,6 +1,6 @@
 <div class="row mx-auto mt-4">
   <div class="col col-lg-8 mx-auto">
-    <form action="/search" method="POST">
+    <form action="/search" method="GET">
       <div class="form-group">
         <label for="search"><i class="fas fa-search fa-2x mr-3"></i>搜尋短網址之原始網址</label>
         <input type="search" class="form-control mt-2" id="search" maxlength="" placeholder="SEARCH"
@@ -49,7 +49,7 @@
         <button class="btn btn-secondary  btn-copyShortURL">
           <i class="fas fa-link mr-2"></i>copy link
         </button>
-        <a href="/link/{{record.urlCode}}" class="btn btn-info" target="_blank">link to website</a>
+        <a href="/{{record.urlCode}}" class="btn btn-info" target="_blank">link to website</a>
       </div>
     </div>
   </div>
